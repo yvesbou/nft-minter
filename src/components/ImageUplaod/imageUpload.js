@@ -7,7 +7,7 @@ const UploadAndDisplayImage = () => {
     <div>
       {selectedImage && (
         <div>
-        <img alt="not found" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+        <img alt="not found" height={"350"} width={"350"} src={URL.createObjectURL(selectedImage)} />
         <br />
         <button onClick={()=>setSelectedImage(null)}>Remove</button>
         </div>
