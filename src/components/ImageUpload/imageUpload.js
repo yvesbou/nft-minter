@@ -5,7 +5,7 @@ const UploadAndDisplayImage = () => {
 
   const removeImage= (e) => {
     setSelectedImage(null)
-    e.target.value=null
+    e.target.value=null // does not work to reset the description next to button
   }
   
 
