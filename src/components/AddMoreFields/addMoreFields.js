@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-const AddMoreFieldsButton = ({ props }) =>{
+const ChangeNumFields = ({ props }) =>{
     
     const { numAdditionalFields, incrementFields, decrementFields } = props
     
@@ -13,8 +13,9 @@ const AddMoreFieldsButton = ({ props }) =>{
         <>
             <label htmlFor='add more fields'> Add more fields </label>
             <button onClick={incrementFields}>+</button>
+            <button onClick={decrementFields}>-</button>
         </>
     )
 }
 
-export default React.memo(AddMoreFieldsButton); //React.memo(AddMoreFieldsButton) => only re-render if props have changed
+export default React.memo(ChangeNumFields); //React.memo(AddMoreFieldsButton) => only re-render if props have changed

@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import UploadAndDisplayImage from 'components/ImageUpload/imageUpload';
-import AddMoreFieldsButton from "components/AddMoreFields/addMoreFields";
+import ChangeNumFields from "components/AddMoreFields/addMoreFields";
 
 const Form = () => {
     const [numAdditionalFields, setNumAdditionalFields] = useState(0)
@@ -27,7 +27,7 @@ const Form = () => {
             <br></br>
             <UploadAndDisplayImage />
             <br></br>
-            <AddMoreFieldsButton
+            <ChangeNumFields
                 props={{
                     numAdditionalFields: numAdditionalFields,
                     incrementFields: incrementFields,
