@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const UploadAndDisplayImage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const removeImage= (e) => {
+    setSelectedImage(null)
+    e.target.value=null
+  }
+  
 
   return (
     <div>
@@ -9,7 +15,7 @@ const UploadAndDisplayImage = () => {
         <div>
         <img alt="not found" height={"350"} width={"350"} src={URL.createObjectURL(selectedImage)} />
         <br />
-        <button onClick={()=>setSelectedImage(null)}>Remove</button>
+        <button onClick={(e)=>removeImage(e)}>Remove</button>
         </div>
       )}
       <label htmlFor='Image upload'>Image of the NFT</label>

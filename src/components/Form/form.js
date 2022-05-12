@@ -3,6 +3,17 @@ import UploadAndDisplayImage from 'components/ImageUpload/imageUpload';
 import AddMoreFieldsButton from "components/AddMoreFields/addMoreFields";
 
 const Form = () => {
+    const [numAdditionalFields, setNumAdditionalFields] = useState(0)
+
+    const incrementFields = (e) => {
+        e.preventDefault();
+        setNumAdditionalFields(numAdditionalFields + 1);
+      };
+
+    const decrementFields = (e) => {
+        e.preventDefault();
+        setNumAdditionalFields(numAdditionalFields - 1);
+    };
     
     return (
         <form>
@@ -16,7 +27,12 @@ const Form = () => {
             <br></br>
             <UploadAndDisplayImage />
             <br></br>
-            <AddMoreFieldsButton />
+            <AddMoreFieldsButton
+                props={{
+                    numAdditionalFields: numAdditionalFields,
+                    incrementFields: incrementFields,
+                    decrementFields: decrementFields
+                }}/>
             <br></br>
             <input type="submit" value="Mint NFT"></input>
         </form>

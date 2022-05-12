@@ -1,15 +1,20 @@
-import React, {useState} from "react"
+import React, { useState, useEffect } from "react"
 
-const AddMoreFieldsButton = () =>{
-    const [additionalFields, setAdditionalFields] = useState(0)
-    console.log(additionalFields)
+const AddMoreFieldsButton = ({ props }) =>{
+    
+    const { numAdditionalFields, incrementFields, decrementFields } = props
+    
+
+    useEffect(()=> {
+        console.log(numAdditionalFields)
+    })
 
     return (
         <>
             <label htmlFor='add more fields'> Add more fields </label>
-            <button onClick={(event)=>{setAdditionalFields(additionalFields+1)}}>+</button>
+            <button onClick={incrementFields}>+</button>
         </>
     )
 }
 
-export default AddMoreFieldsButton;
+export default React.memo(AddMoreFieldsButton); //React.memo(AddMoreFieldsButton) => only re-render if props have changed
