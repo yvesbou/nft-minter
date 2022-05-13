@@ -12,17 +12,19 @@ const Form = () => {
 
     const decrementFields = (e) => {
         e.preventDefault();
+        if (numAdditionalFields === 0) return;
         setNumAdditionalFields(numAdditionalFields - 1);
     };
 
     const renderAdditionalInputFields = () => {
         let inputFields = [];
         for (var i = 0; i < numAdditionalFields; i++) {
+            let subfield = false
             inputFields.push(
-            <>
-            <br></br>
-            <input key={`${i}-additional-element`} type="text" name={`${i}-additional-element`} id={`${i}-additional-element`}></input>
-            </>
+            <li style={{"listStyle": "none"}} key={`${i}-additional-element`} >
+                <input type="text" name={`${i}-additional-element`} id={`${i}-additional-element`} onChange={()=>{subfield=true}}></input>
+                {subfield ?? <li style={{"listStyle": "none"}} key={`${i}-additional-sub-element`}></li>}
+            </li>
             )
         } 
         return inputFields
@@ -49,6 +51,7 @@ const Form = () => {
                 }}/>
             <br></br>
             {renderAdditionalInputFields()}
+            <br></br>
             <br></br>
             <input type="submit" value="Mint NFT"></input>
         </form>
