@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import UploadAndDisplayImage from 'components/ImageUpload/imageUpload';
-import ChangeNumFields from "components/AddMoreFields/addMoreFields";
+import ChangeNumFields from "components/ChangeNumFields/changeNumFields";
 
 const Form = () => {
     const [numAdditionalFields, setNumAdditionalFields] = useState(0)
