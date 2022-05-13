@@ -23,7 +23,8 @@ const Form = () => {
             <input type="text" name="nftname" id="nftname"></input>
             <br></br>
             <label htmlFor='nftdescription'> Description</label>
-            <input type="text" name="nftdescription" id="nftdescription"></input>
+            <br></br>
+            <textarea cols="30" rows="20" name="nftdescription" id="nftdescription"></textarea>
             <br></br>
             <UploadAndDisplayImage />
             <br></br>
