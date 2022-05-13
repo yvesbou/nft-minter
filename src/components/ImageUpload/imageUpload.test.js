@@ -13,29 +13,42 @@ describe("Upload files", () => {
     });
 
     afterEach(() => {
-        window.URL.createObjectURL.mockReset();
+      window.URL.createObjectURL.mockReset();
       });
 
     test('Upload Component Mounted', ()=>{
-        render(<UploadAndDisplayImage/>)
-        screen.getByText('Image of the NFT')
+      render(<UploadAndDisplayImage/>)
+      screen.getByText('Image of the NFT')
     })
   
     test("cover photo upload", async () => {
     
-        // render the component
-        render(<UploadAndDisplayImage />);
-  
-        // get the upload button 
-        const input = screen.getByTestId(/fileDropzone/i);
-        //const input = screen.getByLabelText('Image of the NFT')
-        
-        await userEvent.upload(input, file)
+      // render the component
+      render(<UploadAndDisplayImage />);
 
-        expect(input.files[0]).toBe(file)
-        expect(input.files.item(0)).toBe(file)
-        expect(input.files).toHaveLength(1)
+      // get the upload button 
+      //const input = screen.getByTestId(/fileDropzone/i);
+      const input = screen.getByLabelText('Image of the NFT')
+      
+      await userEvent.upload(input, file)
+
+      expect(input.files[0]).toBe(file)
+      expect(input.files.item(0)).toBe(file)
+      expect(input.files).toHaveLength(1)
 
     });
+
+    test("user remove uploaded photo", async () => {
+      render(<UploadAndDisplayImage />);
+
+      const input = screen.getByLabelText('Image of the NFT')
+      await userEvent.upload(input, file)
+
+      const remove = screen.getByText('Remove')
+      await userEvent.click(remove)
+
+      expect(input.files).toHaveLength(0)
+    })
+
   });
 
