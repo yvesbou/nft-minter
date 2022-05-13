@@ -5,7 +5,7 @@ const UploadAndDisplayImage = () => {
 
   const removeImage= (e) => {
     setSelectedImage(null)
-    e.target.value=null // does not work to reset the description next to button
+    e.target.files[0]=null // does not work to reset the description next to button
   }
   
 
@@ -13,9 +13,13 @@ const UploadAndDisplayImage = () => {
     <div>
       {selectedImage && (
         <div>
-        <img alt="not found" height={"350"} width={"350"} src={URL.createObjectURL(selectedImage)} />
+        <img alt="not found" id='imageNFT' height={"350"} width={"350"} src={URL.createObjectURL(selectedImage)} />
         <br />
-        <button onClick={(e)=>removeImage(e)}>Remove</button>
+        <button onClick={(e)=>{
+          removeImage(e)
+          var imageNFT = document.getElementById('imageNFT');
+          imageNFT.parentNode.removeChild(imageNFT);
+        }}>Remove</button>
         </div>
       )}
       <label htmlFor='Image upload'>Image of the NFT</label>

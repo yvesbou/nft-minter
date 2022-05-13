@@ -45,6 +45,7 @@ describe("Upload files", () => {
       await userEvent.upload(input, file)
 
       const remove = screen.getByText('Remove')
+      expect(remove).toBeInTheDocument()
       await userEvent.click(remove)
 
       expect(input.files).toHaveLength(0)
