@@ -14,6 +14,19 @@ const Form = () => {
         e.preventDefault();
         setNumAdditionalFields(numAdditionalFields - 1);
     };
+
+    const renderAdditionalInputFields = () => {
+        let inputFields = [];
+        for (var i = 0; i < numAdditionalFields; i++) {
+            inputFields.push(
+            <>
+            <br></br>
+            <input key={`${i}-additional-element`} type="text" name={`${i}-additional-element`} id={`${i}-additional-element`}></input>
+            </>
+            )
+        } 
+        return inputFields
+    }
     
     return (
         <form>
@@ -34,6 +47,8 @@ const Form = () => {
                     incrementFields: incrementFields,
                     decrementFields: decrementFields
                 }}/>
+            <br></br>
+            {renderAdditionalInputFields()}
             <br></br>
             <input type="submit" value="Mint NFT"></input>
         </form>
