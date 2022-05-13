@@ -19,11 +19,15 @@ const Form = () => {
     const renderAdditionalInputFields = () => {
         let inputFields = [];
         for (var i = 0; i < numAdditionalFields; i++) {
-            let subfield = false
             inputFields.push(
             <li style={{"listStyle": "none"}} key={`${i}-additional-element`} >
-                <input type="text" name={`${i}-additional-element`} id={`${i}-additional-element`} onChange={()=>{subfield=true}}></input>
-                {subfield ?? <li style={{"listStyle": "none"}} key={`${i}-additional-sub-element`}></li>}
+                <input type="text" name={`${i}-additional-element`} id={`${i}-additional-element`} placeholder="attributes"></input>
+                <ul>
+                    <li style={{"listStyle": "none"}} key={`${i}-additional-sub-element`}>
+                        <input type="text" name={`${i}-additional-sub-element-key`} id={`${i}-additional-sub-element-key`} placeholder="eye-color"></input>
+                        <input type="text" name={`${i}-additional-sub-element-value`} id={`${i}-additional-sub-element-value`} placeholder="red"></input>
+                    </li>
+                </ul>
             </li>
             )
         } 
