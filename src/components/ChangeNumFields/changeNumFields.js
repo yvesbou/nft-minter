@@ -5,10 +5,6 @@ const ChangeNumFields = ({ props }) =>{
     const { numAdditionalFields, incrementFields, decrementFields } = props
     
 
-    useEffect(()=> {
-        console.log(numAdditionalFields)
-    })
-
     return (
         <>
             <label htmlFor='add more fields'> Add more fields </label>
