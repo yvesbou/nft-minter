@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import * as React from 'react'
 import {render, screen, within, fireEvent,  } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
-import UploadAndDisplayImage from './imageUpload'
+import UploadAndDisplayImage from 'components/ImageUpload/imageUpload'
 
 describe("Upload files", () => {
     let file;

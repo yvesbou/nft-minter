@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import * as React from 'react'
 import {render, screen, within } from '@testing-library/react'
-import Form from './form';
+import Form from 'components/Form/form';
 
 test('Renders Form', () => {
   render(<Form />)

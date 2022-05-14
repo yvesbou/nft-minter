@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Form from '../Form/form';
+import Form from 'components/Form/form';
 import 'components/NFTMinter/styles.css';
 
 const NFTMinter = ({props}) => {
