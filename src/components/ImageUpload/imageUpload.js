@@ -6,6 +6,8 @@ const UploadAndDisplayImage = () => {
   const removeImage= (e) => {
     setSelectedImage(null)
     e.target.files[0]=null // does not work to reset the description next to button
+    var imageNFT = document.getElementById('imageNFT');
+    imageNFT.parentNode.removeChild(imageNFT);
   }
   
 
@@ -17,8 +19,6 @@ const UploadAndDisplayImage = () => {
         <br />
         <button onClick={(e)=>{
           removeImage(e)
-          var imageNFT = document.getElementById('imageNFT');
-          imageNFT.parentNode.removeChild(imageNFT);
         }}>Remove</button>
         </div>
       )}
