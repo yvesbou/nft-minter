@@ -28,7 +28,7 @@ const Form = () => {
 
     const updateLabelInMetaDataField = (index, event) => {
         const newLabel = event.target.value;
-        const metadataField = new MetadataField(newLabel, metadataFields[index].type, metadataFields[index].value)
+        const metadataField = new MetadataField(newLabel, metadataFields[index].type, metadataFields[index].value);
         setMetadataFields(prevState => 
             [...prevState.slice(0,index), metadataField, ...prevState.slice(index+1)]
         )
@@ -36,7 +36,15 @@ const Form = () => {
 
     const updateTypeInMetaDataField = (index, event) => {
         const newType = event.target.value;
-        const metadataField = new MetadataField(metadataFields[index].label, newType, metadataFields[index].value)
+        const metadataField = new MetadataField(metadataFields[index].label, newType, metadataFields[index].value);
+        setMetadataFields(prevState => 
+            [...prevState.slice(0,index), metadataField, ...prevState.slice(index+1)]
+        )
+    }
+
+    const updateValueInMetaDataField = (index, event) => {
+        const newValue = event.target.value;
+        const metadataField = new MetadataField(metadataFields[index].label, metadataFields[index].type, newValue);
         setMetadataFields(prevState => 
             [...prevState.slice(0,index), metadataField, ...prevState.slice(index+1)]
         )
@@ -63,8 +71,7 @@ const Form = () => {
                     {field.type === 'String' && (
                         <input  defaultValue={field.value} 
                                 onChange={(e) => {
-                                    metadataFields[i].value = e.target.value;
-                                    setMetadataFields(metadataFields);
+                                    updateValueInMetaDataField(i, e);
                                 }} 
                                 type="text" 
                                 name={`${i}-additional-element`} 
