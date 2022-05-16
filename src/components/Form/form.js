@@ -1,36 +1,68 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import UploadAndDisplayImage from 'components/ImageUpload/imageUpload';
 import ChangeNumFields from "components/ChangeNumFields/changeNumFields";
 
+class MetadataField {
+    constructor(label = '', type = 'List', value = '') {
+        this.label = label;
+        this.type = type;
+        this.value = value;
+    }
+}
+
 const Form = () => {
-    const [numAdditionalFields, setNumAdditionalFields] = useState(0)
+    const [metadataFields, setMetadataFields] = useState([new MetadataField()])
 
     const incrementFields = (e) => {
         e.preventDefault();
-        setNumAdditionalFields(numAdditionalFields + 1);
+        setMetadataFields([...metadataFields, new MetadataField()]);
       };
 
     const decrementFields = (e) => {
         e.preventDefault();
-        if (numAdditionalFields === 0) return;
-        setNumAdditionalFields(numAdditionalFields - 1);
+        if (metadataFields.length === 0) return;
+        setMetadataFields(prevState => 
+            [...prevState.slice(0,-1)]
+        )
     };
 
     const renderAdditionalInputFields = () => {
         let inputFields = [];
-        for (var i = 0; i < numAdditionalFields; i++) {
+        //console.log(metadataFields);
+        metadataFields.forEach((field, i) => {
+            //console.log(field);
             inputFields.push(
-            <li style={{"listStyle": "none"}} key={`${i}-additional-element`} >
-                <input type="text" name={`${i}-additional-element`} id={`${i}-additional-element`} placeholder="attributes"></input>
-                <ul>
-                    <li style={{"listStyle": "none"}} key={`${i}-additional-sub-element`}>
-                        <input type="text" name={`${i}-additional-sub-element-key`} id={`${i}-additional-sub-element-key`} placeholder="eye-color"></input>
-                        <input type="text" name={`${i}-additional-sub-element-value`} id={`${i}-additional-sub-element-value`} placeholder="red"></input>
-                    </li>
-                </ul>
-            </li>
+                <li style={{"listStyle": "none"}} key={`${i}-additional-element`} >
+                    <input defaultValue={field.label} onChange={(e) => {
+                        metadataFields[i].label = e.target.value;
+                        setMetadataFields(metadataFields);
+                    }} type="text" name={`${i}-additional-element`} id={`${i}-additional-element`} placeholder="key"></input>
+
+                    <select defaultValue={field.type} name="metadataFieldType" id="metadataFieldType" onChange={(e) =>{
+                        metadataFields[i].type = e.target.value;
+                        setMetadataFields(metadataFields);
+                    }}>
+                        <option value="String">Text</option>
+                        <option value="List">List</option>
+                    </select>
+
+                    {field.type === 'String' && (
+                        <input  defaultValue={field.value} 
+                                onChange={(e) => {
+                                    metadataFields[i].value = e.target.value;
+                                    setMetadataFields(metadataFields);
+                                }} 
+                                type="text" 
+                                name={`${i}-additional-element`} 
+                                id={`${i}-additional-element`} 
+                                placeholder="value" />
+                    )}
+                    {/* {field.type === 'List' && (
+                        renderAdditionalInputFields()
+                    )} */}
+                </li>
             )
-        } 
+        });
         return inputFields
     }
     
@@ -49,7 +81,7 @@ const Form = () => {
             <br></br>
             <ChangeNumFields
                 props={{
-                    numAdditionalFields: numAdditionalFields,
+                    numAdditionalFields: metadataFields,
                     incrementFields: incrementFields,
                     decrementFields: decrementFields
                 }}/>
@@ -57,7 +89,7 @@ const Form = () => {
             {renderAdditionalInputFields()}
             <br></br>
             <br></br>
-            <input type="submit" value="Mint NFT"></input>
+            <input type="submit" value="Mint NFT" onClick={() => console.log(metadataFields)}></input>
         </form>
     )
 }
