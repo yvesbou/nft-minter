@@ -26,6 +26,22 @@ const Form = () => {
         )
     };
 
+    const updateLabelInMetaDataField = (index, event) => {
+        const newLabel = event.target.value;
+        const metadataField = new MetadataField(newLabel, metadataFields[index].type, metadataFields[index].value)
+        setMetadataFields(prevState => 
+            [...prevState.slice(0,index), metadataField, ...prevState.slice(index+1)]
+        )
+    }
+
+    const updateTypeInMetaDataField = (index, event) => {
+        const newType = event.target.value;
+        const metadataField = new MetadataField(metadataFields[index].label, newType, metadataFields[index].value)
+        setMetadataFields(prevState => 
+            [...prevState.slice(0,index), metadataField, ...prevState.slice(index+1)]
+        )
+    }
+
     const renderAdditionalInputFields = () => {
         let inputFields = [];
         //console.log(metadataFields);
@@ -34,13 +50,11 @@ const Form = () => {
             inputFields.push(
                 <li style={{"listStyle": "none"}} key={`${i}-additional-element`} >
                     <input defaultValue={field.label} onChange={(e) => {
-                        metadataFields[i].label = e.target.value;
-                        setMetadataFields(metadataFields);
+                        updateLabelInMetaDataField(i, e);
                     }} type="text" name={`${i}-additional-element`} id={`${i}-additional-element`} placeholder="key"></input>
 
                     <select defaultValue={field.type} name="metadataFieldType" id="metadataFieldType" onChange={(e) =>{
-                        metadataFields[i].type = e.target.value;
-                        setMetadataFields(metadataFields);
+                        updateTypeInMetaDataField(i, e);
                     }}>
                         <option value="String">Text</option>
                         <option value="List">List</option>
