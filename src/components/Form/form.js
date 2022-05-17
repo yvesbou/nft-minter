@@ -3,7 +3,7 @@ import UploadAndDisplayImage from 'components/ImageUpload/imageUpload';
 import ChangeNumFields from "components/ChangeNumFields/changeNumFields";
 
 class MetadataField {
-    constructor(label = '', type = 'List', value = '') {
+    constructor(label = '', type = 'Text', value = '') {
         this.label = label;
         this.type = type;
         this.value = value;
