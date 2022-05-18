@@ -18,7 +18,7 @@ const FormSection = () => {
 
     return (
         <Formik
-            initialValues={{ nameOfNFT: '', description: '' , image_name: '', image_type: ''}}
+            initialValues={{ nameOfNFT: '', description: '' , image_name: '', image_type: '', blockchain: ''}}
             validate={values => {
                 const errors = {};
                 return errors;
@@ -53,6 +53,19 @@ const FormSection = () => {
                 />
                 <br/>
                 {file && <img width="300" height="300" src={file} /> }
+                <br/>
+                <Field 
+                    as="select"
+                    name="blockchain"
+                    id="select_blockchain"
+                    placeholder="Select Blockchain"
+                >
+                    <option value="">Select a Chain</option>
+                    <option value="Ethereum">Ethereum</option>
+                    <option value="Avalanche">Avalanche</option>
+                    <option value="Binance Smart Chain">Binance Smart Chain</option>
+                    <option value="Polygon">Polygon</option>
+                </Field>
                 <br/>
                 <button type="submit" disabled={isSubmitting}>
                     Submit
