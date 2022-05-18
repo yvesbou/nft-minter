@@ -1,7 +1,19 @@
 import React, { useState } from "react"
 import { DisplayFormState } from "components/FormSection/displayFormState"
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
+const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, 'Too Short!')
+      .max(200, 'Too Long!')
+      .required('An NFT needs a name'),
+    description: Yup.string()
+      .min(3, 'Too Short!')
+      .max(200, 'Too Long!')
+      .required('An NFT needs a description'),
+    
+  });
 
 const FormSection = () => {
     const [file, setFile] = useState('')
@@ -18,6 +30,7 @@ const FormSection = () => {
     return (
         <Formik
             initialValues={{ name: '', description: '' , image_name: '', image_type: '', blockchain: ''}}
+            validationSchema={validationSchema}
             validate={values => {
                 const errors = {};
                 return errors;
@@ -29,7 +42,7 @@ const FormSection = () => {
                 }, 400);
             }}
         >
-        {({ values, isSubmitting, setFieldValue }) => (
+        {({ errors, touched, values, isSubmitting, setFieldValue }) => (
             <Form>
                 <label htmlFor="name">Name of NFT</label>
                 <Field type="text" name="name" />
@@ -67,7 +80,7 @@ const FormSection = () => {
                 </Field>
                 <br/>
                 <button type="submit" disabled={isSubmitting}>
-                    Submit
+                    Mint NFT
                 </button>
                 <DisplayFormState {...values} />
             </Form>
