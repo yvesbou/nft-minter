@@ -1,7 +1,6 @@
 import React, { useState } from "react"
-import UploadAndDisplayImage from 'components/ImageUpload/imageUpload';
-import ChangeNumFields from "components/ChangeNumFields/changeNumFields";
-import formik, { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
+import { DisplayFormState } from "components/FormSection/displayFormState"
+import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 
 
 const FormSection = () => {
@@ -18,7 +17,7 @@ const FormSection = () => {
 
     return (
         <Formik
-            initialValues={{ nameOfNFT: '', description: '' , image_name: '', image_type: '', blockchain: ''}}
+            initialValues={{ name: '', description: '' , image_name: '', image_type: '', blockchain: ''}}
             validate={values => {
                 const errors = {};
                 return errors;
@@ -32,9 +31,9 @@ const FormSection = () => {
         >
         {({ values, isSubmitting, setFieldValue }) => (
             <Form>
-                <label htmlFor="nameOfNFT">Name of NFT</label>
-                <Field type="text" name="nameOfNFT" />
-                <ErrorMessage name="nameOfNFT" component="div" />
+                <label htmlFor="name">Name of NFT</label>
+                <Field type="text" name="name" />
+                <ErrorMessage name="name" component="div" />
                 <br></br>
                 <label htmlFor="description">Give your NFT a Description</label>
                 <Field type="text" as="textarea" name="description" />
@@ -60,17 +59,19 @@ const FormSection = () => {
                     id="select_blockchain"
                     placeholder="Select Blockchain"
                 >
-                    <option value="">Select a Chain</option>
-                    <option value="Ethereum">Ethereum</option>
-                    <option value="Avalanche">Avalanche</option>
-                    <option value="Binance Smart Chain">Binance Smart Chain</option>
+                    <option value="">Select a Chain (Testnet only)</option>
+                    <option value="Ethereum">Ethereum (Kovan)</option>
+                    <option value="Avalanche">Avalanche (Fuji)</option>
+                    <option value="Binance Smart Chain">Binance Smart Chain (...)</option>
                     <option value="Polygon">Polygon</option>
                 </Field>
                 <br/>
                 <button type="submit" disabled={isSubmitting}>
                     Submit
                 </button>
+                <DisplayFormState {...values} />
             </Form>
+            
         )}
      </Formik>
     )
