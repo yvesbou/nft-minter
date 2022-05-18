@@ -5,19 +5,36 @@ import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(3, 'Too Short!')
-      .max(200, 'Too Long!')
-      .required('An NFT needs a name'),
+        .min(3, 'Too Short!')
+        .max(200, 'Too Long!')
+        .required('An NFT needs a name'),
     description: Yup.string()
-      .min(3, 'Too Short!')
-      .max(200, 'Too Long!')
-      .required('An NFT needs a description'),
+        .min(3, 'Too Short!')
+        .max(200, 'Too Long!')
+        .required('An NFT needs a description'),
+    blockchain: Yup.string()
+        .min(1, 'Please select a Blockchain to proceed')
+        .required('Please select a Blockchain to proceed'),
+    image_type: Yup.mixed()
+        .required('You need an image.')
+        .test(
+            "fileFormat",
+            "Unsupported Format",
+            value => value && SUPPORTED_FORMATS.includes(value)
+        )
     
   });
 
+const SUPPORTED_FORMATS = [
+    "image/jpg",
+    "image/jpeg",
+    "image/gif",
+    "image/png"
+  ];
+
 const FormSection = () => {
     const [file, setFile] = useState('')
-    
+
     const handleFileUpload = (event) => {
         const reader = new FileReader();
         const file = event.target.files[0];
@@ -63,6 +80,7 @@ const FormSection = () => {
                     handleFileUpload(event);
                 }}
                 />
+                <ErrorMessage name="image_type" component="div" />
                 <br/>
                 {file && <img width="300" height="300" src={file} /> }
                 <br/>
@@ -78,6 +96,7 @@ const FormSection = () => {
                     <option value="Binance Smart Chain">Binance Smart Chain (...)</option>
                     <option value="Polygon">Polygon</option>
                 </Field>
+                <ErrorMessage name="blockchain" component="div" />
                 <br/>
                 <button type="submit" disabled={isSubmitting}>
                     Mint NFT
