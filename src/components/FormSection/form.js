@@ -93,8 +93,8 @@ const FormSection = () => {
                     <option value="">Select a Chain (Testnet only)</option>
                     <option value="Ethereum">Ethereum (Kovan)</option>
                     <option value="Avalanche">Avalanche (Fuji)</option>
-                    <option value="Binance Smart Chain">Binance Smart Chain (...)</option>
-                    <option value="Polygon">Polygon</option>
+                    <option value="Binance Chain">Binance Chain (Testnet)</option>
+                    <option value="Polygon">Polygon (Mumbai)</option>
                 </Field>
                 <ErrorMessage name="blockchain" component="div" />
                 <br/>
